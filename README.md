@@ -2,6 +2,14 @@
 
 A tool to extract subdomains of a given domain from a URL or a list of URLs with the ability to run multiple threads and limit requests.
 
+# Compile
+
+```
+git clone https://github.com/David12457899/subdomainExtractor.git
+cd subdomainExtractor
+go build . && ./subdomainExtractor
+```
+
 # Usage Examples:
 
 `subdomainExtractor -d <domain> -u <url> / -f <file>`
