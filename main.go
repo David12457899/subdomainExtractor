@@ -82,7 +82,6 @@ func main() {
 			content, err := fetchContent(link, *insecure)
 			<-semaphore
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "Failed to fetch %s: %v\n", link, err)
 				return
 			}
 
