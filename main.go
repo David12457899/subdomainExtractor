@@ -13,6 +13,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/schollz/progressbar/v3"
 )
 
 func main() {
@@ -71,6 +73,14 @@ func main() {
 	seen := make(map[string]bool)
 	var seenLock sync.Mutex
 
+	bar := progressbar.NewOptions(len(urls),
+		progressbar.OptionSetDescription("Processing"),
+		progressbar.OptionShowCount(),
+		progressbar.OptionSetWidth(15),
+		progressbar.OptionSetPredictTime(true),
+		progressbar.OptionClearOnFinish(),
+	)
+
 	for _, link := range urls {
 		wg.Add(1)
 		go func(link string) {
@@ -81,6 +91,9 @@ func main() {
 
 			content, err := fetchContent(link, *insecure)
 			<-semaphore
+
+			_ = bar.Add(1)
+
 			if err != nil {
 				return
 			}
